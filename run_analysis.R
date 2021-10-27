@@ -38,10 +38,11 @@ meansandsd<-select(allresults,contains("mean") | contains("sd") | contains("acti
 # Meaningful names and labels
 activity_names <- merge(meansandsd, activities, by = "activityID", all.x = TRUE)
 
-#Project2 <- aggregate(. ~subjectID + activityID, activity_names, mean)
-#tidyDF<-aggregate(. ~subjectID + activityID, activity_names, mean)
+# create tidy data set with the average of each variable for each activity and each subject.
 meltedData <- melt(meansandsd, id = c("subjectID", "activityID"))
 tidyData <- dcast(meltedData, subjectID + activityID ~ variable, mean)
-write.table(tidyData,"cleanDataSet.csv",sep = "\t")
+#write.table(tidyData,"cleanDataSet.csv",sep = "\t")
+ll<-read.csv("/home/llist/RProjects/Getting and Cleaning Data/CleaningDataAssignment/cleanDataSet.csv",sep = "\t")
+print(colnames(ll))
 
 
